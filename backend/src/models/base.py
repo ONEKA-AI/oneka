@@ -2,11 +2,8 @@
 Base model class for SQLAlchemy models with common functionality.
 """
 
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, DateTime, func
-
-# Create base class for all models
-Base = declarative_base()
+from src.database import Base  # Import Base from database.py
 
 
 class TimestampMixin:
