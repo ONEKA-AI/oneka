@@ -1,0 +1,139 @@
+name: ci-pipeline
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: main-ci
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+  APP_DIR: frontend/
+
+jobs:
+  build-and-test:
+    name: Build, Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ${{ env.APP_DIR }}/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ${{ env.APP_DIR }}
+        run: npm ci
+
+      - name: Run lint
+        working-directory: ${{ env.APP_DIR }}
+        run: npm run lint --if-present
+
+      - name: Run unit tests
+        working-directory: ${{ env.APP_DIR }}
+        run: npm test --if-present -- --ci
+
+      - name: Generate coverage
+        working-directory: ${{ env.APP_DIR }}
+        run: npm run coverage --if-present
+
+      - name: Build application
+        working-directory: ${{ env.APP_DIR }}
+        run: npm run build
+
+      - name: Verify build output
+        working-directory: ${{ env.APP_DIR }}
+        run: |
+          test -d dist
+          ls -la dist
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: ${{ env.APP_DIR }}/dist
+
+  dependency-security:
+    name: Dependency Vulnerability Scan (SCA)
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: OWASP Dependency Check
+        uses: dependency-check-action@v2
+        with:
+          project: oneka-frontend
+          scan-path: ./${{ env.APP_DIR }}
+          format: ALL
+          fail-on-vulnerabilities: ${{ github.event_name == 'push' }}
+
+      - name: Upload OWASP report
+        uses: actions/upload-artifact@v4
+        with:
+          name: owasp-report
+          path: dependency-check-report.*
+
+  static-code-analysis:
+    name: Static Code Analysis (SonarCloud)
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=ONEKA-AI_oneka
+            -Dsonar.organization=oneka-ai
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=${{ env.APP_DIR }}
+            -Dsonar.javascript.lcov.reportPaths=${{ env.APP_DIR }}/coverage/lcov.info
+
+  container-security:
+    name: Container Security Scan (Optional)
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: ${{ hashFiles('Dockerfile') != '' }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t oneka-frontend:ci .
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@v0.24.0
+        with:
+          image-ref: oneka-frontend:ci
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+
+  notify:
+    name: Notify CI Result
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-test
+      - dependency-security
+      - static-code-analysis
+    if: always()
+
+    steps:
+      - name: CI Summary
+        run: |
+          echo "CI completed for $GITHUB_REF"
+          echo "Status: ${{ job.status }}"
