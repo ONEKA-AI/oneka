@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ONEKA AI - Government Intelligence Design System */
+    /* Light mode - institutional, court-ready aesthetic */
+    
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.375rem;
+
+    /* Status Colors - Government Standard */
+    --status-green: 142 76% 36%;
+    --status-green-muted: 142 40% 90%;
+    --status-amber: 38 92% 50%;
+    --status-amber-muted: 38 50% 90%;
+    --status-red: 0 84% 60%;
+    --status-red-muted: 0 50% 90%;
+
+    /* Chart Colors */
+    --chart-1: 215 70% 50%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 280 60% 50%;
+    --chart-5: 0 84% 60%;
+
+    /* Glass Panel */
+    --glass-bg: 0 0% 100% / 0.9;
+    --glass-border: 214 32% 91% / 0.8;
+
+    /* Grid Overlay */
+    --grid-color: 214 32% 91% / 0.3;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 47% 11%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 210 40% 94%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 222 47% 11%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Monospace for numbers and financial data */
+  .font-mono, .tabular-nums {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+@layer components {
+  /* Glass Panel Effect */
+  .glass-panel {
+    @apply rounded-lg border backdrop-blur-xl;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+  }
+
+  /* Grid Overlay Background */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Topographical Wireframe Background */
+  .topo-wireframe {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpath d='M50 200 Q100 150 150 200 T250 200 T350 200' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.3'/%3E%3Cpath d='M30 220 Q80 170 130 220 T230 220 T330 220' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.25'/%3E%3Cpath d='M70 180 Q120 130 170 180 T270 180 T370 180' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M20 250 Q70 200 120 250 T220 250 T320 250' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M80 160 Q130 110 180 160 T280 160 T380 160' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M40 280 Q90 230 140 280 T240 280 T340 280' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.1'/%3E%3Cellipse cx='200' cy='200' rx='150' ry='100' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.15'/%3E%3Cellipse cx='200' cy='200' rx='120' ry='80' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.2'/%3E%3Cellipse cx='200' cy='200' rx='90' ry='60' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.25'/%3E%3Cellipse cx='200' cy='200' rx='60' ry='40' fill='none' stroke='%23334155' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+  }
+
+  /* Status Badges */
+  .status-green {
+    @apply text-sm font-semibold px-3 py-1 rounded;
+    background: hsl(var(--status-green-muted));
+    color: hsl(var(--status-green));
+  }
+
+  .status-amber {
+    @apply text-sm font-semibold px-3 py-1 rounded;
+    background: hsl(var(--status-amber-muted));
+    color: hsl(var(--status-amber));
+  }
+
+  .status-red {
+    @apply text-sm font-semibold px-3 py-1 rounded;
+    background: hsl(var(--status-red-muted));
+    color: hsl(var(--status-red));
+  }
+
+  /* Data Table Styling */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground py-3 px-4 border-b;
+  }
+
+  .data-table td {
+    @apply py-3 px-4 border-b border-border/50;
+  }
+
+  .data-table tr:hover {
+    @apply bg-accent/30;
+  }
+
+  /* KPI Card */
+  .kpi-card {
+    @apply glass-panel p-5;
+  }
+
+  .kpi-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2;
+  }
+
+  .kpi-value {
+    @apply text-2xl font-bold font-mono tabular-nums;
+  }
+
+  /* Section Headers */
+  .section-header {
+    @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4;
+  }
+
+  /* Legal Reference Style */
+  .legal-ref {
+    @apply text-xs font-mono text-muted-foreground;
+  }
+
+  /* Console Input */
+  .console-input {
+    @apply bg-input border border-border rounded-md px-4 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring;
+  }
+}
+
+@layer utilities {
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle Glow for Status Indicators */
+  .glow-green {
+    box-shadow: 0 0 12px hsl(var(--status-green) / 0.3);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 12px hsl(var(--status-amber) / 0.3);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 12px hsl(var(--status-red) / 0.3);
+  }
+}
