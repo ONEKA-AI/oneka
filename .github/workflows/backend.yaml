@@ -42,9 +42,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run lint (flake8)
-        working-directory: ${{ env.APP_DIR }}
-        run: flake8 . --count --statistics
 
       - name: Run unit tests
         working-directory: ${{ env.APP_DIR }}

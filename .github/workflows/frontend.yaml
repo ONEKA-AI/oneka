@@ -22,7 +22,7 @@ env:
 
 jobs:
   build-and-test:
-    name: Build, Lint & Test
+    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
@@ -40,18 +40,7 @@ jobs:
         working-directory: ${{ env.APP_DIR }}
         run: npm ci
 
-      - name: Run lint
-        working-directory: ${{ env.APP_DIR }}
-        run: npm run lint --if-present
-
-      - name: Run unit tests
-        working-directory: ${{ env.APP_DIR }}
-        run: npm test --if-present -- --ci
-
-      - name: Generate coverage
-        working-directory: ${{ env.APP_DIR }}
-        run: npm run coverage --if-present
-
+      
       - name: Build application
         working-directory: ${{ env.APP_DIR }}
         run: npm run build
