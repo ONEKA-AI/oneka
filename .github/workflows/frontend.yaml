@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [main]
   path:
-    - 'frontend/**'
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yaml'
 
 concurrency:
   group: main-ci

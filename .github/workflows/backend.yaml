@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [main]
   path:
-    - 'backend/**'
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yaml'
 
 concurrency:
   group: main-ci
