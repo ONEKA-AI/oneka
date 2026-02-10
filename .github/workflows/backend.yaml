@@ -87,20 +87,19 @@ jobs:
     name: Container Security Scan (Optional)
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: ${{ hashFiles('backend/Dockerfile') != '' }}
+    if: ${{ hashFiles('Dockerfile') != '' }}
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        working-directory: ${{ env.APP_DIR }}
-        run: docker build -t oneka-backend:ci .
+        run: docker build -t oneka-frontend:ci .
 
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@v0.24.0
         with:
-          image-ref: oneka-backend:ci
+          image-ref: oneka-frontend:ci
           severity: HIGH,CRITICAL
           exit-code: '1'
 

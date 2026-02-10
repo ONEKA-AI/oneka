@@ -114,7 +114,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        working-directory: ${{ env.APP_DIR }}
         run: docker build -t oneka-frontend:ci .
 
       - name: Scan image with Trivy
