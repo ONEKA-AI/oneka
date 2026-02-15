@@ -5,3 +5,4 @@ data/processed/
 .ipynb_checkpoints/
 .vscode/
 node_modules/
+frontend/.env
