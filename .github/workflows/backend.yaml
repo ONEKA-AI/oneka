@@ -80,6 +80,12 @@ jobs:
     needs: build-and-test
 
     steps:
+      - name: ensure dockekrfile exists
+        run: |
+          if [ ! -f Dockerfile ]; then
+            echo "Dockerfile not found!"
+            exit 1
+          fi
       - name: Checkout source
         uses: actions/checkout@v4
 
