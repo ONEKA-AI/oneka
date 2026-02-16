@@ -46,7 +46,7 @@ const loadGoogleMaps = (apiKey: string) => {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=beta&libraries=maps3d`;
     script.async = true;
     script.defer = true;
-    script.setAttribute("data-google-maps", "true");
+    script.dataset.googleMaps = "true";
     script.onload = () => resolve();
     script.onerror = () => reject(new Error("Failed to load Google Maps"));
     document.head.appendChild(script);
@@ -217,29 +217,36 @@ export default function MapView() {
     activeFilters: ProjectFilters,
     options: { ignoreCounty?: boolean } = {}
   ) => {
-    if (activeFilters.search) {
-      const searchLower = activeFilters.search.toLowerCase();
-      const matchesSearch =
+    const searchLower = activeFilters.search?.trim().toLowerCase();
+    if (
+      searchLower &&
+      !(
         project.name.toLowerCase().includes(searchLower) ||
         project.id.toLowerCase().includes(searchLower) ||
-        project.entity.toLowerCase().includes(searchLower);
-      if (!matchesSearch) return false;
+        project.entity.toLowerCase().includes(searchLower)
+      )
+    ) {
+      return false;
     }
 
-    if (!options.ignoreCounty && activeFilters.county !== "All Counties") {
-      if (!project.county.includes(activeFilters.county)) return false;
+    if (
+      !options.ignoreCounty &&
+      activeFilters.county !== "All Counties" &&
+      !project.county.includes(activeFilters.county)
+    ) {
+      return false;
     }
 
-    if (activeFilters.sector !== "All Sectors") {
-      if (project.sector !== activeFilters.sector) return false;
+    if (activeFilters.sector !== "All Sectors" && project.sector !== activeFilters.sector) {
+      return false;
     }
 
-    if (activeFilters.riskLevel !== "All Risk Levels") {
-      if (project.riskLevel !== activeFilters.riskLevel) return false;
+    if (activeFilters.riskLevel !== "All Risk Levels" && project.riskLevel !== activeFilters.riskLevel) {
+      return false;
     }
 
-    if (activeFilters.auditStatus !== "All Statuses") {
-      if (project.auditStatus !== activeFilters.auditStatus) return false;
+    if (activeFilters.auditStatus !== "All Statuses" && project.auditStatus !== activeFilters.auditStatus) {
+      return false;
     }
 
     return true;
