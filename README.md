@@ -10,7 +10,7 @@
 
 ## 🎯 Overview
 
-ONEKA AI is an intelligent infrastructure auditing platform that combines **artificial intelligence, satellite imagery, and data interoperability** to detect ghost projects and prevent corruption before billions of shillings are lost.
+ONEKA AI is an intelligent infrastructure auditing platform, that combines **artificial intelligence, satellite imagery, and data interoperability** to detect ghost projects and prevent corruption before billions of shillings are lost.
 
 Traditional infrastructure audits take 18-24 months and cost KES 2-5 million per project. By the time auditors discover a ghost project, the money is already gone. **ONEKA AI completes the same audit in 48 hours at 1% of the cost** by automatically cross-referencing procurement records, financial reports, and satellite imagery.
 
