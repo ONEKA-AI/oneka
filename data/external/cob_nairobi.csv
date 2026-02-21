@@ -1,0 +1,51 @@
+county,project_name,sector,sub_sector,fy,budget_allocated_kes,amount_spent_kes,status,planned_start_date,planned_end_date,report_date,latitude,longitude,source
+Nairobi,Rehabilitation of Kibera Borehole,Water,Water Infrastructure,2024/2025,323806717,160433166,Delayed,2024-12-18,2025-12-18,2025-09-09,-1.330468,36.672153,SYNTHETIC_COB_DATA
+Nairobi,Maternity Wing Expansion at Westlands,Health,Health Facilities,2023/2024,291508909,236022640,Completed,2024-11-27,2025-08-24,2024-10-11,-1.112243,36.916487,SYNTHETIC_COB_DATA
+Nairobi,Construction of Mathare Water Pipeline,Water,Water Infrastructure,2024/2025,305638488,71179039,Ongoing,2023-11-22,2026-02-11,2024-08-02,-1.492487,36.734017,SYNTHETIC_COB_DATA
+Nairobi,Construction of Mathare Classroom Block,Education,School Infrastructure,2023/2024,51098023,17853044,Ongoing,2024-02-22,2026-04-29,2025-05-10,-1.26956,36.768058,SYNTHETIC_COB_DATA
+Nairobi,Construction of Mathare Footbridge,Transport,Road Works,2023/2024,179713447,75524343,Ongoing,2023-10-27,2024-08-03,2025-02-13,-1.184699,36.807104,SYNTHETIC_COB_DATA
+Nairobi,Maternity Wing Expansion at Dagoretti,Health,Health Facilities,2024/2025,96672739,76603664,Completed,2024-07-04,2025-08-18,2024-05-17,-1.128534,37.029805,SYNTHETIC_COB_DATA
+Nairobi,Construction of Makadara Health Centre,Health,Health Facilities,2024/2025,241109424,120599966,Ongoing,2024-11-12,2026-07-11,2025-03-20,-1.370686,36.95699,SYNTHETIC_COB_DATA
+Nairobi,Construction of Mathare Water Pipeline,Water,Water Infrastructure,2023/2024,35996024,9123263,Stalled,2024-07-03,2025-10-15,2025-12-06,-1.450378,36.719471,SYNTHETIC_COB_DATA
+Nairobi,Construction of Westlands Classroom Block,Education,School Infrastructure,2024/2025,132491858,122253327,Completed,2023-09-14,2025-03-11,2024-12-02,-1.444893,36.795474,SYNTHETIC_COB_DATA
+Nairobi,Upgrading of Makadara Urban Road,Transport,Road Works,2024/2025,186715287,91451495,Ongoing,2024-01-28,2026-07-12,2024-08-28,-1.090306,36.811336,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Dagoretti Road,Transport,Road Works,2023/2024,265891102,52125759,Ongoing,2024-06-11,2026-06-01,2025-05-01,-1.475835,37.041788,SYNTHETIC_COB_DATA
+Nairobi,Periodic Maintenance of Ruaraka Road Section,Transport,Road Works,2024/2025,255956372,224515170,Completed,2023-07-01,2024-12-13,2025-01-15,-1.178768,36.848632,SYNTHETIC_COB_DATA
+Nairobi,Construction of Dagoretti Water Pipeline,Water,Water Infrastructure,2024/2025,70455540,16728868,Stalled,2024-01-20,2024-07-17,2025-09-19,-1.328804,36.786007,SYNTHETIC_COB_DATA
+Nairobi,Construction of Kasarani Classroom Block,Education,School Infrastructure,2023/2024,210107710,180064897,Completed,2024-06-05,2026-02-06,2025-05-04,-1.098012,36.761877,SYNTHETIC_COB_DATA
+Nairobi,Expansion of Makadara Water Supply Scheme,Water,Water Infrastructure,2024/2025,244771687,78537187,Ongoing,2023-10-26,2026-02-17,2025-10-05,-1.097289,36.85753,SYNTHETIC_COB_DATA
+Nairobi,Construction of Makadara Classroom Block,Education,School Infrastructure,2023/2024,241786343,84990806,Ongoing,2024-12-06,2026-02-20,2024-03-14,-1.126488,37.026792,SYNTHETIC_COB_DATA
+Nairobi,Supply of Furniture to Mathare Secondary School,Education,School Infrastructure,2024/2025,89823287,52255433,Delayed,2024-01-13,2024-08-24,2024-05-15,-1.118763,36.950606,SYNTHETIC_COB_DATA
+Nairobi,Upgrading of Westlands Sub-County Hospital,Health,Health Facilities,2023/2024,274390012,161995986,Delayed,2024-09-15,2025-01-14,2025-12-14,-1.130476,36.818343,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Embakasi Road,Transport,Road Works,2024/2025,114329460,120099978,Completed,2024-02-29,2024-09-30,2024-12-15,-1.508325,36.892126,SYNTHETIC_COB_DATA
+Nairobi,Supply of Furniture to Langata Secondary School,Education,School Infrastructure,2023/2024,79865813,73429342,Ongoing,2024-06-22,2026-03-08,2025-10-04,-1.187385,36.87354,SYNTHETIC_COB_DATA
+Nairobi,Expansion of Makadara Water Supply Scheme,Water,Water Infrastructure,2023/2024,199704334,21447889,Stalled,2023-09-20,2025-07-24,2025-09-25,-1.153465,36.82548,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Dagoretti Road,Transport,Road Works,2023/2024,102866290,102299874,Completed,2023-07-19,2024-09-12,2024-02-25,-1.158163,36.916195,SYNTHETIC_COB_DATA
+Nairobi,Rehabilitation of Makadara Primary School,Education,School Infrastructure,2023/2024,287928106,91203928,Ongoing,2023-07-06,2025-06-26,2024-06-05,-1.381064,36.824015,SYNTHETIC_COB_DATA
+Nairobi,Construction of Kasarani Water Storage Tank,Water,Water Infrastructure,2024/2025,12259170,12114149,Completed,2023-12-25,2025-01-12,2025-06-30,-1.449644,36.660978,SYNTHETIC_COB_DATA
+Nairobi,Supply of Furniture to Westlands Secondary School,Education,School Infrastructure,2023/2024,197355245,130750373,Stalled,2024-04-04,2024-09-11,2025-10-25,-1.184597,36.876303,SYNTHETIC_COB_DATA
+Nairobi,Supply of Furniture to Makadara Secondary School,Education,School Infrastructure,2024/2025,296343939,312366047,Completed,2023-07-04,2023-12-05,2024-05-09,-1.31602,36.634992,SYNTHETIC_COB_DATA
+Nairobi,Construction of Embakasi Laboratory Block,Education,School Infrastructure,2023/2024,298601157,283529728,Completed,2023-12-27,2025-06-03,2024-06-14,-1.368515,36.618565,SYNTHETIC_COB_DATA
+Nairobi,Construction of Kasarani Water Pipeline,Water,Water Infrastructure,2024/2025,15561121,15318748,Completed,2023-11-20,2025-07-26,2024-08-23,-1.430613,36.821003,SYNTHETIC_COB_DATA
+Nairobi,Rehabilitation of Dagoretti Borehole,Water,Water Infrastructure,2023/2024,47299698,26629344,Stalled,2024-11-12,2025-12-02,2024-08-19,-1.105101,36.626324,SYNTHETIC_COB_DATA
+Nairobi,Rehabilitation of Embakasi Dispensary,Health,Health Facilities,2023/2024,231604792,237491822,Completed,2024-04-04,2026-01-22,2024-01-14,-1.104197,36.648384,SYNTHETIC_COB_DATA
+Nairobi,Construction of Kasarani Water Pipeline,Water,Water Infrastructure,2024/2025,85393632,63226797,Completed,2024-05-31,2025-04-19,2025-12-10,-1.481814,36.67328,SYNTHETIC_COB_DATA
+Nairobi,Expansion of Makadara Water Supply Scheme,Water,Water Infrastructure,2023/2024,29015873,26783806,Completed,2023-08-18,2024-02-29,2025-10-14,-1.509486,36.858351,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Kasarani Road,Transport,Road Works,2023/2024,217605400,80928311,Ongoing,2024-08-07,2026-08-06,2024-01-19,-1.28022,36.922901,SYNTHETIC_COB_DATA
+Nairobi,Periodic Maintenance of Mathare Road Section,Transport,Road Works,2023/2024,142056990,136061027,Completed,2024-01-18,2025-12-13,2025-01-27,-1.206542,36.695318,SYNTHETIC_COB_DATA
+Nairobi,Construction of Embakasi Footbridge,Transport,Road Works,2024/2025,330648771,195272351,Stalled,2024-08-05,2025-01-01,2025-12-10,-1.382261,36.864901,SYNTHETIC_COB_DATA
+Nairobi,Upgrading of Makadara Urban Road,Transport,Road Works,2024/2025,342363767,78140340,Stalled,2024-08-14,2026-02-09,2025-01-23,-1.123646,36.687288,SYNTHETIC_COB_DATA
+Nairobi,Rehabilitation of Mathare Borehole,Water,Water Infrastructure,2023/2024,105377385,27717701,Stalled,2024-03-11,2024-07-12,2025-10-04,-1.415867,36.987635,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Langata Road,Transport,Road Works,2023/2024,72614204,14330381,Stalled,2024-09-18,2025-03-26,2024-11-27,-1.489606,36.834117,SYNTHETIC_COB_DATA
+Nairobi,Construction of Embakasi Footbridge,Transport,Road Works,2024/2025,148459401,30976318,Stalled,2023-08-29,2025-07-24,2024-06-26,-1.268334,36.802632,SYNTHETIC_COB_DATA
+Nairobi,Expansion of Westlands Water Supply Scheme,Water,Water Infrastructure,2024/2025,288875942,278839777,Completed,2023-07-20,2025-12-17,2024-03-12,-1.258521,36.981191,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Ruaraka Road,Transport,Road Works,2023/2024,267903125,205545775,Ongoing,2024-11-24,2026-11-25,2025-03-19,-1.254407,36.796439,SYNTHETIC_COB_DATA
+Nairobi,Supply and Installation of Medical Equipment at Westlands,Health,Health Facilities,2023/2024,109472799,40852748,Ongoing,2024-07-08,2026-06-26,2024-10-10,-1.157423,36.60643,SYNTHETIC_COB_DATA
+Nairobi,Construction of Ruaraka Footbridge,Transport,Road Works,2024/2025,217566027,58161648,Stalled,2024-04-29,2025-11-28,2024-11-03,-1.082903,36.844576,SYNTHETIC_COB_DATA
+Nairobi,Periodic Maintenance of Makadara Road Section,Transport,Road Works,2024/2025,327816471,276171559,Completed,2024-11-16,2025-12-21,2025-09-01,-1.11693,36.856644,SYNTHETIC_COB_DATA
+Nairobi,Upgrading of Kasarani Sub-County Hospital,Health,Health Facilities,2023/2024,257268215,33464134,Ongoing,2024-09-26,2026-03-16,2024-11-09,-1.292382,36.861844,SYNTHETIC_COB_DATA
+Nairobi,Construction of Embakasi Water Pipeline,Water,Water Infrastructure,2023/2024,263426985,235507969,Ongoing,2024-10-06,2027-02-27,2025-07-14,-1.180164,36.864675,SYNTHETIC_COB_DATA
+Nairobi,Construction of Embakasi Water Storage Tank,Water,Water Infrastructure,2023/2024,34169305,33799769,Completed,2024-05-09,2025-07-07,2025-06-20,-1.342257,36.677975,SYNTHETIC_COB_DATA
+Nairobi,Construction of Dagoretti Classroom Block,Education,School Infrastructure,2023/2024,248875085,208064711,Ongoing,2024-08-27,2026-11-26,2024-03-24,-1.089269,37.020002,SYNTHETIC_COB_DATA
+Nairobi,Upgrading of Kibera Sub-County Hospital,Health,Health Facilities,2024/2025,175029946,62747710,Ongoing,2023-11-17,2024-07-20,2025-10-28,-1.378032,36.896997,SYNTHETIC_COB_DATA
+Nairobi,Grading and Murraming of Dagoretti Road,Transport,Road Works,2024/2025,127674950,107331167,Completed,2024-09-06,2025-12-05,2024-05-13,-1.388038,37.042714,SYNTHETIC_COB_DATA

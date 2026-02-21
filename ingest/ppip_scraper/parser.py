@@ -1,19 +1,16 @@
-# ingest/ppip_scraper/parser.py
-from typing import List, Dict
+from datetime import datetime
 
-def parse_tender_json(json_data: Dict) -> List[Dict]:
-    """
-    Parse the JSON data from tenders.go.ke into a list of tenders.
-    """
+def parse_tender_list(api_response: dict) -> list[dict]:
     tenders = []
 
-    for item in json_data.get("data", []):
+    for item in api_response.get("data", []):
         tenders.append({
-            "title": item.get("title", "No title"),
-            "url": "https://tenders.go.ke" + item.get("link", ""),
-            "id": item.get("id", None),
-            "close_at": item.get("close_at", ""),
-            "published_at": item.get("published_at", "")
+            "title": item.get("title"),
+            "reference": item.get("tender_ref"),
+            "published_at": item.get("published_at"),
+            "close_at": item.get("close_at"),
+            "procuring_entity": item.get("pe", {}).get("name"),
+            "raw": item
         })
 
     return tenders

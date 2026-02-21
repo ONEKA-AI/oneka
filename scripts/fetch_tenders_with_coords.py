@@ -22,3 +22,15 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(tenders_with_coords, f, indent=2, ensure_ascii=False)
 
 print(f"Saved {len(tenders_with_coords)} tenders with coordinates to {OUTPUT_FILE}")
+
+# scripts/fetch_tenders_with_coords.py (add at the bottom)
+try:
+    for t in tenders_with_coords[:5]:
+        print("Title:", t.get("title"))
+        print("Matched Facility:", t.get("matched_facility"))
+        print("Latitude:", t.get("latitude"))
+        print("Longitude:", t.get("longitude"))
+        print("---")
+except Exception as e:
+    print("No data yet, or failed to load tenders:", e)
+
