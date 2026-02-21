@@ -2,9 +2,9 @@ name: ci-pipeline
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - develop
+# push:
+#  branches:
+#   - develop
   
 
 concurrency:

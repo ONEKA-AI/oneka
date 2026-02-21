@@ -2,11 +2,11 @@ name: ci-pipeline
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - develop
-    paths:
-      - 'frontend/**'
+#  push:
+#    branches:
+#      - develop
+#    paths:
+#      - 'frontend/**'
   
   
 
