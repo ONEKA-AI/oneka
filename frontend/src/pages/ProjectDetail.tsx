@@ -12,7 +12,12 @@ import {
   TrendingUp,
   AlertTriangle,
   CheckCircle2,
-  Download
+  Download,
+  ShoppingCart,
+  Users,
+  Banknote,
+  TrendingDown,
+  Flag
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
@@ -42,7 +47,7 @@ function formatCurrency(value: number): string {
   return `KES ${(value / 1000000).toFixed(0)}M`;
 }
 
-function getRiskColor(risk: string): "red" | "amber" | "green" | "yellow" {
+function getRiskColor(risk: string): "red" | "amber" | "green" {
   if (risk === "critical") return "red";
   if (risk === "high") return "red";
   if (risk === "medium") return "amber";
@@ -318,6 +323,181 @@ export default function ProjectDetail() {
                 </div>
               </div>
             </div>
+
+            {/* Procurement Data Section */}
+            {project.procurement && (
+              <div className="glass-panel p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <ShoppingCart className="w-4 h-4 text-muted-foreground" />
+                  <h3 className="section-header mb-0">Procurement Data</h3>
+                </div>
+
+                {/* Tender Info */}
+                <div className="mb-5 pb-4 border-b border-border">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Tender ID</span>
+                      <p className="font-mono text-xs mt-1">{project.procurement.tenderId}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Method</span>
+                      <p className="font-medium text-xs mt-1">{project.procurement.method}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Published</span>
+                      <p className="font-mono text-xs mt-1">
+                        {new Date(project.procurement.publishedDate).toLocaleDateString("en-KE")}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Closing</span>
+                      <p className="font-mono text-xs mt-1">
+                        {new Date(project.procurement.closingDate).toLocaleDateString("en-KE")}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tender Comparison */}
+                <div className="mb-5 pb-4 border-b border-border">
+                  <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
+                    <Banknote className="w-4 h-4 text-muted-foreground" />
+                    Tender Comparison (±15% Threshold)
+                  </h4>
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="p-3 bg-secondary/30 rounded-md">
+                      <p className="text-xs text-muted-foreground mb-1">Engineer's Est.</p>
+                      <p className="font-mono font-semibold text-sm">
+                        {formatCurrency(project.procurement.engineersEstimate)}
+                      </p>
+                    </div>
+                    <div className={`p-3 rounded-md ${
+                      Math.abs(((project.procurement.awardedValue - project.procurement.engineersEstimate) / project.procurement.engineersEstimate) * 100) <= 15
+                        ? "bg-status-green-muted"
+                        : "bg-status-red-muted"
+                    }`}>
+                      <p className="text-xs text-muted-foreground mb-1">Awarded Value</p>
+                      <p className={`font-mono font-semibold text-sm ${
+                        Math.abs(((project.procurement.awardedValue - project.procurement.engineersEstimate) / project.procurement.engineersEstimate) * 100) <= 15
+                          ? "text-status-green"
+                          : "text-status-red"
+                      }`}>
+                        {formatCurrency(project.procurement.awardedValue)}
+                      </p>
+                    </div>
+                    <div className="p-3 bg-secondary/30 rounded-md">
+                      <p className="text-xs text-muted-foreground mb-1">Variance</p>
+                      <p className={`font-mono font-semibold text-sm ${
+                        Math.abs(((project.procurement.awardedValue - project.procurement.engineersEstimate) / project.procurement.engineersEstimate) * 100) <= 15
+                          ? "text-status-green"
+                          : "text-status-red"
+                      }`}>
+                        {(((project.procurement.awardedValue - project.procurement.engineersEstimate) / project.procurement.engineersEstimate) * 100).toFixed(1)}%
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Acceptable Range Indicator */}
+                  <div className="p-3 bg-secondary/20 border border-border rounded-md">
+                    <p className="text-xs text-muted-foreground mb-2">Acceptable Range</p>
+                    <div className="space-y-1 text-xs font-mono">
+                      <div className="flex justify-between">
+                        <span className="text-status-green">Minimum: {formatCurrency(project.procurement.engineersEstimate * 0.85)}</span>
+                        <span className="text-muted-foreground">(-15%)</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-status-green">Maximum: {formatCurrency(project.procurement.engineersEstimate * 1.15)}</span>
+                        <span className="text-muted-foreground">(+15%)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bidders */}
+                <div className="mb-5 pb-4 border-b border-border">
+                  <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
+                    <Users className="w-4 h-4 text-muted-foreground" />
+                    Bidders ({project.procurement.totalBidders})
+                  </h4>
+                  <div className="space-y-2">
+                    {project.procurement.bidders.map((bidder) => {
+                      const isWithinRange = Math.abs(bidder.variance) <= 15;
+                      return (
+                        <div key={bidder.id} className={`p-3 rounded-md border ${
+                          bidder.flagged || !isWithinRange
+                            ? "border-status-red/30 bg-status-red-muted"
+                            : bidder.status === "selected"
+                              ? "border-status-green/30 bg-status-green-muted"
+                              : "border-status-green/20 bg-status-green-muted/30"
+                        }`}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <p className={`font-medium text-sm ${
+                                  bidder.status === "selected" ? "text-status-green" : ""
+                                }`}>
+                                  {bidder.name}
+                                </p>
+                                {bidder.status === "selected" && (
+                                  <span className="px-2 py-0.5 bg-status-green/20 text-status-green text-xs rounded font-medium">
+                                    ✓ Selected
+                                  </span>
+                                )}
+                                {isWithinRange && bidder.status !== "selected" && (
+                                  <span className="px-2 py-0.5 bg-status-green/20 text-status-green text-xs rounded font-medium">
+                                    Within Range
+                                  </span>
+                                )}
+                                {!isWithinRange && (
+                                  <span className="px-2 py-0.5 bg-status-red/20 text-status-red text-xs rounded font-medium">
+                                    Out of Range
+                                  </span>
+                                )}
+                                {bidder.flagged && (
+                                  <Flag className="w-3 h-3 text-status-red flex-shrink-0" />
+                                )}
+                              </div>
+                              {bidder.flag && (
+                                <p className="text-xs text-muted-foreground mt-1">{bidder.flag}</p>
+                              )}
+                            </div>
+                          <div className="text-right ml-2">
+                            <p className="font-mono text-sm font-semibold">
+                              {formatCurrency(bidder.quote)}
+                            </p>
+                            <p className={`text-xs font-mono mt-0.5 ${
+                              isWithinRange
+                                ? "text-status-green"
+                                : "text-status-red"
+                            }`}>
+                              {bidder.variance > 0 ? "+" : ""}{bidder.variance.toFixed(1)}%
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                    })}
+                  </div>
+                </div>
+
+                {/* Irregularities */}
+                {project.procurement.irregularities && project.procurement.irregularities.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-medium mb-3 flex items-center gap-2 text-status-red">
+                      <AlertTriangle className="w-4 h-4" />
+                      Procurement Irregularities
+                    </h4>
+                    <div className="space-y-2">
+                      {project.procurement.irregularities.map((irregularity, idx) => (
+                        <div key={idx} className="p-2 bg-status-red-muted/50 border border-status-red/20 rounded text-xs text-muted-foreground">
+                          • {irregularity}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Right Column - Details */}

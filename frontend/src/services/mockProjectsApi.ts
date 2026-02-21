@@ -18,6 +18,31 @@ export interface Milestone {
   dueDate?: string;
 }
 
+export interface Bidder {
+  id: string;
+  name: string;
+  quote: number;
+  variance: number; // percentage difference from engineer's estimate
+  status: "selected" | "bidding" | "rejected";
+  flagged?: boolean;
+  flag?: string;
+}
+
+export interface ProcurementData {
+  tenderId: string;
+  method: "Open Competitive Bidding" | "Restricted Bidding" | "Direct Procurement";
+  tenderDate: string;
+  closingDate: string;
+  publishedDate: string;
+  engineersEstimate: number;
+  awardedValue: number;
+  awardedVendor: string;
+  totalBidders: number;
+  bidders: Bidder[];
+  procurementStatus: "tender-planned" | "advertised" | "evaluation" | "awarded" | "contracted";
+  irregularities?: string[];
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -31,6 +56,7 @@ export interface Project {
   lastUpdated: string;
   status: "on-track" | "at-risk" | "completed" | "on-hold" | "investigation";
   milestones: Milestone[];
+  procurement?: ProcurementData;
 }
 
 export interface ApiResponse<T> {
@@ -59,6 +85,83 @@ const mockProjects: Project[] = [
       { id: "M4", name: "Final Inspection", completed: false, dueDate: "2024-12-31" },
       { id: "M5", name: "Project Handover", completed: false, dueDate: "2025-03-31" },
     ],
+    procurement: {
+      tenderId: "KENHA/2022/TENDER/001",
+      method: "Open Competitive Bidding",
+      tenderDate: "2022-02-15",
+      closingDate: "2022-04-20",
+      publishedDate: "2022-02-10",
+      engineersEstimate: 5200000000,
+      awardedValue: 4990000000,
+      awardedVendor: "Ballast Nyama Construction Ltd",
+      totalBidders: 7,
+      bidders: [
+        {
+          id: "B1",
+          name: "Ballast Nyama Construction Ltd",
+          quote: 4990000000,
+          variance: -4.04,
+          status: "selected",
+          flagged: false,
+        },
+        {
+          id: "B2",
+          name: "Arab Contractors Kenya Limited",
+          quote: 5100000000,
+          variance: -1.92,
+          status: "bidding",
+          flagged: false,
+        },
+        {
+          id: "B3",
+          name: "Suntra Construction Company",
+          quote: 5500000000,
+          variance: 5.77,
+          status: "bidding",
+          flagged: false,
+        },
+        {
+          id: "B4",
+          name: "Kimwarer & Kipchoge Enterprises",
+          quote: 3800000000,
+          variance: -26.9,
+          status: "rejected",
+          flagged: true,
+          flag: "Quote 26.9% below estimate - OUTSIDE acceptable ±15% range",
+        },
+        {
+          id: "B5",
+          name: "Kesses Contractors",
+          quote: 5980000000,
+          variance: 15.04,
+          status: "rejected",
+          flagged: true,
+          flag: "Quote 15.04% above estimate - OUTSIDE acceptable ±15% range",
+        },
+        {
+          id: "B6",
+          name: "Mabati Rolling Mills",
+          quote: 5050000000,
+          variance: -2.88,
+          status: "bidding",
+          flagged: false,
+        },
+        {
+          id: "B7",
+          name: "Strada Construction",
+          quote: 5400000000,
+          variance: 3.85,
+          status: "bidding",
+          flagged: false,
+        },
+      ],
+      procurementStatus: "contracted",
+      irregularities: [
+        "Winning bid 4.04% below engineer's estimate (within ±15% acceptable range)",
+        "2 bids rejected for exceeding ±15% variance threshold",
+        "5 eligible bids within acceptable range",
+      ],
+    },
   },
   {
     id: "PRJ-2024-002",
@@ -77,6 +180,51 @@ const mockProjects: Project[] = [
       { id: "M2", name: "Procurement Process", completed: true, dueDate: "2024-01-31" },
       { id: "M3", name: "Installation", completed: false, dueDate: "2024-08-31" },
     ],
+    procurement: {
+      tenderId: "KPA/2023/TENDER/045",
+      method: "Restricted Bidding",
+      tenderDate: "2023-05-10",
+      closingDate: "2023-07-15",
+      publishedDate: "2023-05-05",
+      engineersEstimate: 2000000000,
+      awardedValue: 2100000000,
+      awardedVendor: "Sinohydro Corporation",
+      totalBidders: 3,
+      bidders: [
+        {
+          id: "B1",
+          name: "Sinohydro Corporation",
+          quote: 2100000000,
+          variance: 5.0,
+          status: "selected",
+          flagged: true,
+          flag: "Awarded amount exceeds engineer's estimate by 5%",
+        },
+        {
+          id: "B2",
+          name: "Hyundai Engineering & Construction",
+          quote: 2050000000,
+          variance: 2.5,
+          status: "bidding",
+          flagged: false,
+        },
+        {
+          id: "B3",
+          name: "China Communications Construction Company",
+          quote: 2150000000,
+          variance: 7.5,
+          status: "bidding",
+          flagged: true,
+          flag: "Bid higher than winner - evaluation process unclear",
+        },
+      ],
+      procurementStatus: "contracted",
+      irregularities: [
+        "Awarded vendor's quote exceeds engineer's estimate",
+        "Restricted bidding method - limited competition",
+        "Price increase from estimate suggests scope creep or market changes",
+      ],
+    },
   },
   {
     id: "PRJ-2024-003",
