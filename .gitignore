@@ -6,3 +6,15 @@ data/processed/
 .vscode/
 node_modules/
 frontend/.env
+
+# GIS local artifacts
+gis/**/venv/
+gis/**/__pycache__/
+gis/**/*.py[cod]
+gis/.pytest_cache/
+gis/**/*.log
+gis/**/*.tmp
+
+# GIS generated outputs
+gis/**/features/
+gis/**/*.parquet
