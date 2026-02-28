@@ -118,6 +118,12 @@ CONTRACTOR_TYPES = [
     ("Briefcase Contractor", 0.15),
 ]
 
+WEATHER_DELAY_MONTHS = [3, 4, 5, 10, 11]
+
+
+# ==========================================================
+# UTILITIES
+# ==========================================================
 
 WEATHER_DELAY_MONTHS = [3, 4, 5, 10, 11]  # March-May + Oct-Nov (rains)
 
