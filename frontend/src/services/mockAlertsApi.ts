@@ -2,7 +2,6 @@
  * Mock Alerts API Service
  * 
  * Provides audit flags and alert data
- * 20% failure rate for testing
  */
 
 export interface AuditFlag {
@@ -84,20 +83,12 @@ export async function getAuditFlags(): Promise<AuditFlag[]> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
 
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch audit flags. Please try again.");
-  }
-
   return mockAlerts;
 }
 
 export async function getAuditFlagById(id: string): Promise<AuditFlag> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch audit flag details.");
-  }
 
   const flag = mockAlerts.find((f) => f.id === id);
   if (!flag) {
@@ -113,10 +104,6 @@ export async function updateAuditFlagStatus(
 ): Promise<AuditFlag> {
   const delay = Math.random() * 500 + 500;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to update audit flag status.");
-  }
 
   const flag = mockAlerts.find((f) => f.id === flagId);
   if (!flag) {

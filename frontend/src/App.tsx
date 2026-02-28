@@ -15,6 +15,7 @@ import Settings from "./pages/Settings";
 import Agents from "./pages/Agents";
 import ComponentsShowcase from "./pages/ComponentsShowcase";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/showcase" element={<ComponentsShowcase />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

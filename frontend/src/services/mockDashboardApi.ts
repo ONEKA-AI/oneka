@@ -2,7 +2,6 @@
  * Mock Dashboard API Service
  * 
  * Provides KPI and metric data for the dashboard
- * 20% failure rate for testing
  */
 
 export interface KPIData {
@@ -58,10 +57,6 @@ const mockDashboardMetrics: DashboardMetrics = {
 export async function getDashboardMetrics(): Promise<DashboardMetrics> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch dashboard metrics. Please try again.");
-  }
 
   return mockDashboardMetrics;
 }

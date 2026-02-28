@@ -2,7 +2,6 @@
  * Mock Reports API Service
  * 
  * Provides audit reports and evidence data
- * 20% failure rate for testing
  */
 
 export interface AuditReport {
@@ -91,20 +90,12 @@ export async function getAuditReports(): Promise<AuditReport[]> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
 
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch audit reports. Please try again.");
-  }
-
   return mockReports;
 }
 
 export async function getReportById(id: string): Promise<AuditReport> {
   const delay = Math.random() * 800 + 500;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to fetch report details.");
-  }
 
   const report = mockReports.find((r) => r.id === id);
   if (!report) {
@@ -120,10 +111,6 @@ export async function updateReportStatus(
 ): Promise<AuditReport> {
   const delay = Math.random() * 600 + 400;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to update report status.");
-  }
 
   const report = mockReports.find((r) => r.id === reportId);
   if (!report) {

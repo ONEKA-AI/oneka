@@ -2,7 +2,6 @@
  * Mock Audit Workbench API Service
  * 
  * Provides audit tasks and workbench data
- * 20% failure rate for testing
  */
 
 export interface AuditTask {
@@ -96,10 +95,6 @@ export async function getAuditTasks(): Promise<AuditTask[]> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
 
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch audit tasks. Please try again.");
-  }
-
   return mockAuditTasks;
 }
 
@@ -109,10 +104,6 @@ export async function updateTaskStatus(
 ): Promise<AuditTask> {
   const delay = Math.random() * 600 + 400;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to update task status.");
-  }
 
   const task = mockAuditTasks.find((t) => t.id === taskId);
   if (!task) {
@@ -125,10 +116,6 @@ export async function updateTaskStatus(
 export async function getTasksByProject(projectId: string): Promise<AuditTask[]> {
   const delay = Math.random() * 800 + 500;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.15) {
-    throw new Error("Failed to fetch project tasks.");
-  }
 
   return mockAuditTasks.filter((t) => t.projectId === projectId);
 }

@@ -6,11 +6,11 @@ import {
   AlertTriangle,
   FileText,
   Settings,
-  Shield,
   Activity,
   Bot,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/context/ThemeContext";
 
 const navigation = [
   { name: "Overview", href: "/", icon: LayoutDashboard },
@@ -25,14 +25,21 @@ const navigation = [
 
 export function AppSidebar() {
   const location = useLocation();
+  const { theme } = useTheme();
+  const logoSrc = theme === "dark" ? "/oneka-logo-white.png" : "/oneka-logo-dark.png";
 
   return (
     <aside className="w-64 min-h-screen bg-sidebar border-r border-sidebar-border flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-sidebar-primary/20 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-sidebar-primary" />
+          <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
+            <img
+              src={logoSrc}
+              alt="ONEKA AI"
+              className="w-14 h-14 object-contain"
+              loading="eager"
+            />
           </div>
           <div>
             <h1 className="text-lg font-bold text-foreground tracking-tight">ONEKA AI</h1>

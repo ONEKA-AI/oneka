@@ -9,6 +9,7 @@ import {
   Calendar, 
   FileText, 
   Camera,
+  FileSearch,
   TrendingUp,
   AlertTriangle,
   CheckCircle2,
@@ -184,6 +185,10 @@ export default function ProjectDetail() {
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-md bg-status-amber-muted border border-status-amber/40 text-status-amber hover:bg-status-amber-muted/80 transition-colors text-sm font-medium">
+                <FileSearch className="w-4 h-4" />
+                Order Audit
+              </button>
               <button className="flex items-center gap-2 px-4 py-2 rounded-md border border-border hover:bg-accent transition-colors text-sm">
                 <FileText className="w-4 h-4" />
                 Generate Report

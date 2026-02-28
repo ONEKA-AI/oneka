@@ -5,7 +5,6 @@
  * It can be easily replaced with real API calls later.
  * 
  * Features:
- * - 20% simulated failure rate
  * - 1-2 second network delay
  * - Strongly typed with TypeScript
  * - Production-ready error handling
@@ -412,7 +411,6 @@ const mockProjects: Project[] = [
 
 /**
  * Simulates an API call to fetch projects
- * - 20% failure rate for testing error handling
  * - 1-2 second delay to simulate network latency
  * 
  * @returns Promise that resolves to array of projects
@@ -422,11 +420,6 @@ export async function getProjects(): Promise<Project[]> {
   // Simulate network delay (1-2 seconds)
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  // Simulate 20% failure rate
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch projects from server. Please try again!");
-  }
 
   // Return mock projects
   return mockProjects;
@@ -439,10 +432,6 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProjectById(id: string): Promise<Project> {
   const delay = Math.random() * 1000 + 1000;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.2) {
-    throw new Error("Failed to fetch project details.");
-  }
 
   const project = mockProjects.find((p) => p.id === id);
   if (!project) {
@@ -459,10 +448,6 @@ export async function getProjectById(id: string): Promise<Project> {
 export async function updateProject(id: string, updates: Partial<Project>): Promise<Project> {
   const delay = Math.random() * 1000 + 500;
   await new Promise((resolve) => setTimeout(resolve, delay));
-
-  if (Math.random() < 0.1) {
-    throw new Error("Failed to update project!");
-  }
 
   const project = mockProjects.find((p) => p.id === id);
   if (!project) {

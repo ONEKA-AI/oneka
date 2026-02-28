@@ -58,8 +58,11 @@ const loadGoogleMaps = (apiKey: string) => {
 export default function MapView() {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
+  const mapListenerRef = useRef<any>(null);
   const map3DContainerRef = useRef<HTMLDivElement | null>(null);
   const map3DRef = useRef<any>(null);
+  const geocoderRef = useRef<any>(null);
+  const geocodeTimeoutRef = useRef<number | null>(null);
   const [is3D, setIs3D] = useState(true);
   const [map3DError, setMap3DError] = useState<string | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -74,6 +77,54 @@ export default function MapView() {
     auditStatus: "All Statuses",
   });
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [mapLocation, setMapLocation] = useState({
+    country: "Kenya",
+    lat: -1.2921,
+    lng: 36.8219,
+  });
+
+  const formatLatLng = (lat: number, lng: number) => {
+    const latAbs = Math.abs(lat).toFixed(4);
+    const lngAbs = Math.abs(lng).toFixed(4);
+    const latDir = lat >= 0 ? "N" : "S";
+    const lngDir = lng >= 0 ? "E" : "W";
+    return `${latAbs}${latDir}, ${lngAbs}${lngDir}`;
+  };
+
+  const updateMapLocation = (lat: number, lng: number) => {
+    setMapLocation((prev) => ({ ...prev, lat, lng }));
+
+    if (!window.google?.maps?.Geocoder) {
+      return;
+    }
+
+    if (!geocoderRef.current) {
+      geocoderRef.current = new window.google.maps.Geocoder();
+    }
+
+    if (geocodeTimeoutRef.current) {
+      window.clearTimeout(geocodeTimeoutRef.current);
+    }
+
+    geocodeTimeoutRef.current = window.setTimeout(() => {
+      geocoderRef.current.geocode(
+        { location: { lat, lng } },
+        (results: any, status: string) => {
+          if (status !== "OK" || !results?.length) {
+            return;
+          }
+
+          const countryComponent = results
+            .flatMap((result: any) => result.address_components ?? [])
+            .find((component: any) => component.types?.includes("country"));
+
+          if (countryComponent?.long_name) {
+            setMapLocation((prev) => ({ ...prev, country: countryComponent.long_name }));
+          }
+        }
+      );
+    }, 400);
+  };
 
   const fetchProjects = async () => {
     setLoading(true);
@@ -133,11 +184,36 @@ export default function MapView() {
         tilt: 0,
         ...(renderingType ? { renderingType } : {}),
       });
+
+      updateMapLocation(-1.2921, 36.8219);
+
+      if (mapListenerRef.current) {
+        mapListenerRef.current.remove();
+      }
+
+      mapListenerRef.current = mapRef.current.addListener("idle", () => {
+        const center = mapRef.current?.getCenter?.();
+        if (!center) {
+          return;
+        }
+        const lat = center.lat?.();
+        const lng = center.lng?.();
+        if (typeof lat === "number" && typeof lng === "number") {
+          updateMapLocation(lat, lng);
+        }
+      });
     };
 
     initMap().catch(() => {
       // No-op: the fallback message below will remain visible.
     });
+
+    return () => {
+      if (mapListenerRef.current) {
+        mapListenerRef.current.remove();
+        mapListenerRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -194,10 +270,16 @@ export default function MapView() {
       map3d.addEventListener("gmp-steadychange", (event: any) => {
         if (event?.isSteady) {
           setMap3DError(null);
+          const center = map3d.center;
+          if (center && typeof center.lat === "number" && typeof center.lng === "number") {
+            updateMapLocation(center.lat, center.lng);
+          }
         }
       });
       map3DContainerRef.current.replaceChildren(map3d);
       map3DRef.current = map3d;
+
+      updateMapLocation(map3d.center.lat, map3d.center.lng);
     };
 
     init3D().catch(() => {
@@ -211,6 +293,14 @@ export default function MapView() {
       }
     };
   }, [is3D]);
+
+  useEffect(() => {
+    return () => {
+      if (geocodeTimeoutRef.current) {
+        window.clearTimeout(geocodeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const matchesFilters = (
     project: Project,
@@ -464,7 +554,7 @@ export default function MapView() {
           {/* Coordinates */}
           <div className="absolute bottom-4 right-4 glass-panel px-3 py-2">
             <span className="text-xs font-mono text-muted-foreground">
-              Kenya • 1.2921°S, 36.8219°E
+              {mapLocation.country} | {formatLatLng(mapLocation.lat, mapLocation.lng)}
             </span>
           </div>
         </div>
