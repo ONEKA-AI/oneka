@@ -3,7 +3,6 @@ Tests for database models.
 """
 
 import pytest
-from sqlalchemy import select
 from datetime import datetime, date
 from decimal import Decimal
 
